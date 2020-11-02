@@ -1,6 +1,8 @@
 .weather-list {
     width: 100%;
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: row-reverse;
+    flex-wrap: wrap-reverse;
+    align-content: center;
     justify-content: space-around;
 }
