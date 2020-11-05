@@ -1,6 +1,7 @@
 body {
   margin: 0;
   font-family: 'Quicksand', sans-serif;
+  color: #282c34;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #ffd5c2;

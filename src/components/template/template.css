@@ -1,0 +1,25 @@
+.info-block {
+    width: 100%;
+    height: 100px;
+    text-align: center;
+    border-radius: 20px;
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    box-shadow:  7px 7px 16px #edc6b4, 
+             -7px -7px 16px #ffe4d0;
+}
+.info-block span:first-child {
+    position: relative;
+}
+.info-block span:first-child::after {
+    content: "";
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 1px;
+    width: 100px;
+    background-color: #4e5666;;
+}

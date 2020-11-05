@@ -1,11 +1,10 @@
 .form {
     color: #282c34;
-    height: 300px;
-    width: 250px;
+    width: 100%;
     padding: 25px;
     box-sizing: border-box;
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     justify-content: space-between;
     background-color: #ffd5c2;
     border-radius: 20px;
@@ -14,13 +13,14 @@
 }
 .form__title {
     margin: 0;
-    margin-top: -20px;
+    margin-bottom: 20px;
     text-align: center;
+    width: 100%;
 }
 .label {
     position: relative;
     height: 40px;
-    width: 100%;
+    width: 40%;
 }
 .label__text {
     position: absolute;
@@ -43,6 +43,7 @@
 .form__btn {
     background-color: #ffd5c2;
     height: 40px;
+    width: 15%;
     outline: none;
     border: none;
     cursor: pointer;
