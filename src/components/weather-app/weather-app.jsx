@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-
 import { fetchWeather } from '../../actions/actionCreator';
 
 import './weather-app.css';
@@ -12,21 +11,20 @@ import WeatherInfo from '../weather-info/weather-info';
 class WeatherApp extends Component {
     state = {
         city: '',
-        country: '',
     }
 
     handleInputChange = (event) => {
         this.setState({
-            [event.target.name]: event.target.value,
+            city: event.target.value,
         })
     }
 
     getWeatherInfo = (event) => {
         event.preventDefault();
 
-        const { city, country } = this.state; 
+        const { city } = this.state; 
         const { fetchWeather } = this.props;
-        fetchWeather(city, country);
+        fetchWeather(city);
     }
 
     isEmptyObject = (obj) => {
@@ -35,13 +33,15 @@ class WeatherApp extends Component {
 
     render() {
         const { weatherInfo } = this.props.WeatherInfo;
-        const { city, country } = this.state;
         const isWeatherInfoEmpty = this.isEmptyObject(weatherInfo);
- 
+        console.log(weatherInfo.cod);
         return (
             <div className="wrapper">
-                <Form title="Search weather" onChange={this.handleInputChange} getWeather={this.getWeatherInfo}/>
-                {!isWeatherInfoEmpty && <WeatherInfo city={weatherInfo.name} country={weatherInfo.sys.country} condition={weatherInfo.weather[0].main} clouds={weatherInfo.clouds.all} main={weatherInfo.main}/>}
+                <Form title="Search weather" onChange={this.handleInputChange} getWeather={this.getWeatherInfo}/>         
+                {isWeatherInfoEmpty || weatherInfo.cod === "404" || weatherInfo.cod === "400" 
+                        ? <h2>Not found</h2>
+                        : <WeatherInfo city={weatherInfo.name} country={weatherInfo.sys.country} condition={weatherInfo.weather[0].main} clouds={weatherInfo.clouds.all} main={weatherInfo.main}/>
+                }               
             </div>
         )
     }

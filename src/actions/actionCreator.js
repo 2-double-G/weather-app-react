@@ -1,8 +1,8 @@
 import { API_KEY, FETCH_WEATHER } from '../constants';
 
-export const fetchWeather = (city, country) => {
+export const fetchWeather = (city) => {
     return function(dispatch) {
-        fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${API_KEY}&units=metric`)
+        fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`)
         .then(responce => {
             return responce.json();
         }) 
@@ -14,6 +14,7 @@ export const fetchWeather = (city, country) => {
         })
         .catch(error => {
             console.log(error);
+            console.log("Mm...error");
         });
     }
 }

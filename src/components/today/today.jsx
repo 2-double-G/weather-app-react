@@ -20,4 +20,22 @@ const Today = ({ temp, feelsLike, tempMax, tempMin, pressure, humidity }) => (
     </div>
 );
 
+Today.propTypes = {
+    temp: PropTypes.number,
+    feelsLike: PropTypes.number,
+    tempMax: PropTypes.number,
+    tempMin: PropTypes.number,
+    pressure: PropTypes.number,
+    humidity: PropTypes.number,
+}
+
+Today.defaultProps = {
+    temp: 0,
+    feelsLike: 0,
+    tempMax: 0,
+    tempMin: 0,
+    pressure: 0,
+    humidity: 0,
+}
+
 export default Today;
