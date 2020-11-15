@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 
 import { fetchWeather } from '../../actions/actionCreator';
 
-import './weather-app.css';
+import classes from './Weather.css';
 
-import Form from '../form/form';
-import WeatherInfo from '../weather-info/weather-info';
+import Form from '../../components/form/form';
+import WeatherToday from '../WeatherToday/WeatherToday';
 
 class WeatherApp extends Component {
     state = {
@@ -36,12 +36,15 @@ class WeatherApp extends Component {
         const isWeatherInfoEmpty = this.isEmptyObject(weatherInfo);
         console.log(weatherInfo.cod);
         return (
-            <div className="wrapper">
-                <Form title="Search weather" onChange={this.handleInputChange} getWeather={this.getWeatherInfo}/>         
-                {isWeatherInfoEmpty || weatherInfo.cod === "404" || weatherInfo.cod === "400" 
-                        ? <h2>Not found</h2>
-                        : <WeatherInfo city={weatherInfo.name} country={weatherInfo.sys.country} condition={weatherInfo.weather[0].main} clouds={weatherInfo.clouds.all} main={weatherInfo.main}/>
-                }               
+            <div className={classes.Weather}>
+                <div className={classes.WeatherWrapper}>
+                    <h1>Search weather</h1>
+                    <Form onChange={this.handleInputChange} getWeather={this.getWeatherInfo}/>         
+                    {isWeatherInfoEmpty || weatherInfo.cod === "404" || weatherInfo.cod === "400" 
+                            ? <h2>Not found</h2>
+                            : <WeatherToday main={weatherInfo.main}/>
+                    } 
+                </div>              
             </div>
         )
     }

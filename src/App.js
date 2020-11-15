@@ -1,17 +1,16 @@
 import React, { Fragment } from 'react';
 
-import Title from './components/title/title';
-import WeatherApp from './components/weather-app/weather-app';
-import ErrorBoundary from './components/error-boundary/error-boundary';
+// import Title from './components/title/title';
+// import WeatherApp from './components/weather-app/weather-app';
+// import Weather from './containers/Weather/Weather';
+import GetWeather from './containers/GetWeather/GetWeather';
+import Layout from './hoc/Layout/Layout';
 
 function App() {
   return (
-    <Fragment>
-      <Title title="Weather app"/>
-      <ErrorBoundary>
-        <WeatherApp />
-      </ErrorBoundary>     
-    </Fragment>
+    <Layout>
+      <GetWeather />    
+    </Layout>
   );
 }
 
