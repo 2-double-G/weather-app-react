@@ -7,9 +7,14 @@ function isInvalid({ valid, touched }) {
 
 const Input = (props) => {
     const htmlFor = 'input-city';
+    const cls = [classes.Input];
+
+    if (isInvalid(props)) {
+        cls.push(classes.invalid);
+    }
 
     return (
-        <div>
+        <div className={cls.join(' ')}>
             <label htmlFor={htmlFor}>{ props.label }</label>
             <input
                 type="text"

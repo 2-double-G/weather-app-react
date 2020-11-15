@@ -8,6 +8,7 @@ class GetWeather extends Component {
         isFormValid: false,
         inputControl: {
             value: '',
+            label: 'City',
             errorMessage: 'Enter the city name correctly',
             valid: false,
             touched: false,
@@ -63,6 +64,7 @@ class GetWeather extends Component {
         return (
             <Input
                 value={inputControl.value}
+                label={inputControl.label}
                 valid={inputControl.valid}
                 touched={inputControl.touched}
                 errorMessage={inputControl.errorMessage}
@@ -87,7 +89,7 @@ class GetWeather extends Component {
             <div className={classes.GetWeather}>
                 <div>
                     <h2>Search weather</h2>
-                    <form onSubmit={this.onFormSubmit}>
+                    <form onSubmit={this.onFormSubmit} className={classes.SearchForm}>
                         {this.renderInput()}
                         {this.renderButton()}
                     </form>
