@@ -8,7 +8,6 @@ import { fetchTodayWeather } from './../../actions/todayWeather';
 
 class GetWeather extends Component {
     state = {
-        readyToFetch: false,
         isFormValid: false,
         inputControl: {
             value: '',
@@ -93,21 +92,13 @@ class GetWeather extends Component {
     render() {
         return (
             <div className={classes.GetWeather}>
-                <div>
-                    <h2>Search weather</h2>
-                    <form onSubmit={this.onFormSubmit} className={classes.SearchForm}>
-                        {this.renderInput()}
-                        {this.renderButton()}
-                    </form>
-                </div>
+                <h1>Search weather</h1>
+                <form onSubmit={this.onFormSubmit} className={classes.SearchForm}>
+                    {this.renderInput()}
+                    {this.renderButton()}
+                </form>
             </div>
         )
-    }
-}
-
-function mapStateToProps(state) {
-    return {
-        weather: state.weatherToday.weather
     }
 }
 
@@ -117,4 +108,4 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(GetWeather);
+export default connect(null, mapDispatchToProps)(GetWeather);

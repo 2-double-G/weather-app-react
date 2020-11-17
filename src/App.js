@@ -1,15 +1,17 @@
-import React, { Fragment } from 'react';
+import React from 'react';
+import { Switch, Route } from 'react-router-dom';
 
-// import Title from './components/title/title';
-// import WeatherApp from './components/weather-app/weather-app';
-// import Weather from './containers/Weather/Weather';
-import GetWeather from './containers/GetWeather/GetWeather';
+// import GetWeather from './containers/GetWeather/GetWeather';
 import Layout from './hoc/Layout/Layout';
+import Main from './containers/Main/Main';
 
 function App() {
   return (
     <Layout>
-      <GetWeather />    
+      <Switch>
+        <Route path={'/'} component={Main} />
+        <Route path={'/today'} component={Main}/>
+      </Switch>   
     </Layout>
   );
 }

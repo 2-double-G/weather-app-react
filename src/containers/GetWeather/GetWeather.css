@@ -1,19 +1,11 @@
-.GetWeather {
-    display: flex;
-    justify-content: center;
-    padding-top: 30px;
-    flex-grow: 1;
-    width: 100%;
-    background: linear-gradient(180deg, #00B4DB 0%, #0083B0 100%);
-}
 
-.GetWeather > div {
+.GetWeather {
     width: 100%;
     max-width: 300px;
     padding: 0 20px;
 }
 
-.GetWeather h2 {
+.GetWeather h1 {
     color: #fff;
     text-align: center;
 }

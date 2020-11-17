@@ -6,8 +6,11 @@ import {
 
 const initialState = {
     weather: {},
-    error: null,
-    isError: false
+    touched: false,
+    error: {
+        message: null,
+        isError: false
+    }
 }
 
 export default function weatherReducer(state = initialState, action) {
@@ -15,13 +18,20 @@ export default function weatherReducer(state = initialState, action) {
         case FETCH_WEATHER_SUCCESS:
             return {
                 ...state,
-                weather: action.weather
+                weather: action.weather,
+                touched: true,
+                error: {
+                    isError: false
+                }
             }
         case FETCH_WEATHER_ERROR:
             return {
                 ...state,
-                error: action.error,
-                isError: true
+                touched: true,
+                error: {
+                    message: action.error,
+                    isError: true
+                }
             }
         default:
             return state;

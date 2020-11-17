@@ -1,0 +1,10 @@
+.Main {
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 30px;
+    flex-grow: 1;
+    width: 100%;
+    background: linear-gradient(180deg, #00B4DB 0%, #0083B0 100%);
+}

@@ -11,10 +11,9 @@ export function fetchTodayWeather(city) {
             const response = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`);
             const data = await response.json();
          
-            if (data.cod === '404') throw new Error(data.message);
+            if (data.cod === '404') throw new Error(`City not found`);
 
             dispatch(fetchWeatherSuccess(data));
-
         } catch (error) {
             dispatch(fetchWeatherError(error));          
         }
@@ -31,6 +30,6 @@ export function fetchWeatherSuccess(weather) {
 export function fetchWeatherError(error) {
     return {
         type: FETCH_WEATHER_ERROR,
-        error
+        error: error.message
     }
 }
