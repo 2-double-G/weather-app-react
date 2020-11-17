@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
 import classes from './GetWeather.css';
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
+import { fetchTodayWeather } from './../../actions/todayWeather';
 
 class GetWeather extends Component {
     state = {
+        readyToFetch: false,
         isFormValid: false,
         inputControl: {
             value: '',
@@ -54,8 +58,10 @@ class GetWeather extends Component {
         });
     }
 
-    getWeather() {
-
+    getWeather = () => {
+        if (this.state.isFormValid) {
+            this.props.fetchTodayWeather(this.state.inputControl.value);
+        }
     }
 
     renderInput() {
@@ -77,7 +83,7 @@ class GetWeather extends Component {
         return (
             <Button
                 disabled={!this.state.isFormValid}
-                onChange={this.getWeather}
+                onClick={this.getWeather}
             >
                 Get weather
             </Button>
@@ -99,4 +105,16 @@ class GetWeather extends Component {
     }
 }
 
-export default GetWeather;
+function mapStateToProps(state) {
+    return {
+        weather: state.weatherToday.weather
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        fetchTodayWeather: city => dispatch(fetchTodayWeather(city))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(GetWeather);
