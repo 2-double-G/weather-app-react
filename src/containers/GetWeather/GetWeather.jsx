@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import classes from './GetWeather.css';
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
-import { fetchTodayWeather } from './../../actions/todayWeather';
+import { fetchTodayWeather } from '../../actions/weather';
 
 class GetWeather extends Component {
     state = {

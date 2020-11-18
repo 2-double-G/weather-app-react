@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import classes from './Navigation.css';
 
 const links = [
-    // { to: '/', label: 'Search weather', exact: true },
+    { to: '/', label: 'Search weather', exact: true },
     { to: '/today', label: 'Today', exact: false },
     { to: '/by-hour', label: 'By hour', exact: false },
     { to: '/week', label: 'Week', exact: false },

@@ -1,12 +1,13 @@
 import {
-    // FETCH_WEATHER_TODAY,
+    FETCH_WEATHER_START,
     FETCH_WEATHER_SUCCESS,
     FETCH_WEATHER_ERROR
 } from '../actions/actionTypes';
 
 const initialState = {
-    weather: {},
+    city: null,
     touched: false,
+    weather: {},
     error: {
         message: null,
         isError: false
@@ -18,8 +19,8 @@ export default function weatherReducer(state = initialState, action) {
         case FETCH_WEATHER_SUCCESS:
             return {
                 ...state,
-                weather: action.weather,
                 touched: true,
+                weather: action.weather,
                 error: {
                     isError: false
                 }
@@ -32,6 +33,11 @@ export default function weatherReducer(state = initialState, action) {
                     message: action.error,
                     isError: true
                 }
+            }
+        case FETCH_WEATHER_START:
+            return {
+                ...state,
+                city: action.city
             }
         default:
             return state;

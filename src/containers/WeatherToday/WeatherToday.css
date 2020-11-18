@@ -1,0 +1,44 @@
+.WeatherToday {
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    flex-grow: 1;
+    width: 100%;
+    background: linear-gradient(to bottom, #0b486b, #f56217);
+}
+
+.WeatherToday > div {
+    width: 100%;
+    max-width: 600px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.WeatherToday > div > div {
+    display: flex;
+    flex-direction: column;
+}
+
+.current {
+    font-size: 150px;
+    font-weight: 300;
+}
+
+.MaxMin {
+    font-size: 40px;
+}
+
+.city {
+    font-size: 50px;
+}
+
+.date {
+    font-size: 25px;
+}
+
+.condition {
+    font-size: 40px;
+}
