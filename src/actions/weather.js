@@ -7,13 +7,12 @@ import {
 import is from 'is_js';
 
 
-function storeCityName(city, touched) {
+function storeCityName(city) {
     if (city === null) {
-        // console.log('City was null. Get city name from local storage');
-        // console.log('get item from local storage:', localStorage.getItem('city'))
+        console.log('City was null. Get city name from local storage');
         return localStorage.getItem('city');
     } else {
-        // console.log('City was not null. Set city name in local storage');
+        console.log('City was not null. Set new city name in local storage');
         localStorage.setItem('city', city);
         return city;
     }
@@ -45,22 +44,21 @@ function findPropertyValueByKey(obj, searchItem) {
 
 function getWeatherObject(data) {
     // Need to find this keys in data
-    const keys = ['name', 'dt', 'feels_like', 'temp', 'temp_max', 'temp_min', 'main'];
+    const keys = ['name', 'dt', 'feels_like', 'temp', 'temp_max', 'temp_min', 'main', 'icon'];
     const newObj = {};
 
     keys.forEach(searchItem => {
-        newObj[searchItem] = findPropertyValueByKey(data, searchItem)
+        newObj[searchItem] = findPropertyValueByKey(data, searchItem);
     });
 
     return newObj;
 }
 
 export function fetchTodayWeather(city) {
-    return async (dispatch, getState) => {
+    return async dispatch => {
+
         dispatch(fetchWeatherStart(city));
-        const touched = getState().weatherToday.touched;
-        const localCityName = storeCityName(city, touched);
-        // console.log('localCityName: ', localCityName);
+        const localCityName = storeCityName(city);
 
         try {          
             const response = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${localCityName}&appid=4248d412b7d3efc097f20f1640cf0f2d&units=metric`);

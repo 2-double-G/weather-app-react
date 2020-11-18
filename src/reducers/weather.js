@@ -6,24 +6,32 @@ import {
 
 const initialState = {
     city: null,
-    touched: false,
     weather: {},
+    touched: false,
     error: {
         message: null,
         isError: false
-    }
+    },
+    loading: false,
 }
 
 export default function weatherReducer(state = initialState, action) {
     switch (action.type) {
+        case FETCH_WEATHER_START:
+            return {
+                ...state,
+                city: action.city,
+                loading: true,
+            }
         case FETCH_WEATHER_SUCCESS:
             return {
                 ...state,
-                touched: true,
                 weather: action.weather,
+                touched: true,
                 error: {
                     isError: false
-                }
+                },
+                loading: false,
             }
         case FETCH_WEATHER_ERROR:
             return {
@@ -32,12 +40,8 @@ export default function weatherReducer(state = initialState, action) {
                 error: {
                     message: action.error,
                     isError: true
-                }
-            }
-        case FETCH_WEATHER_START:
-            return {
-                ...state,
-                city: action.city
+                },
+                loading: false,
             }
         default:
             return state;

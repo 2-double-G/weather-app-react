@@ -15,11 +15,16 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
+
+    border-top: 1px solid #ffffff;
+    border-bottom: 1px solid #ffffff;
 }
 
 .WeatherToday > div > div {
     display: flex;
     flex-direction: column;
+    padding: 0 15px;
 }
 
 .current {
@@ -28,7 +33,7 @@
 }
 
 .MaxMin {
-    font-size: 40px;
+    font-size: 35px;
 }
 
 .city {
@@ -41,4 +46,13 @@
 
 .condition {
     font-size: 40px;
+}
+
+.conditionIcon {
+    height: 100px;
+    width: 100px;
+}
+
+.realFeels {
+    font-size: 30px;
 }
