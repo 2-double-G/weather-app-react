@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import classes from './WeatherToday.css';
 import { fetchTodayWeather } from './../../actions/weather';
@@ -19,7 +20,11 @@ class WeatherToday extends Component {
     render() {
         return (
             <Fragment>
-                
+                {
+                    this.props.error || !this.props.weather
+                        ? <Redirect to={'/'} />
+                        : null
+                }
                 <div className={classes.WeatherToday}>
                     <h1>Today's weather</h1>
                     {
@@ -67,6 +72,7 @@ function mapStateToProps(state) {
         weather: state.weatherToday.weather,
         city: state.weatherToday.city,
         error: state.weatherToday.error.isError,
+        touched: state.weatherToday.touched,
         loading: state.weatherToday.loading
     }
 }
