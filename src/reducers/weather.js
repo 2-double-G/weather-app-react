@@ -4,15 +4,20 @@ import {
     FETCH_WEATHER_ERROR,
     FETCH_WEATHER_HOURLY_SUCCESS,
     FETCH_WEATHER_HOURLY_ERROR,
-    FETCH_WEATHER_HOURLY_START
+    FETCH_WEATHER_HOURLY_START,
+    FETCH_WEATHER_WEEKLY_START,
+    FETCH_WEATHER_WEEKLY_SUCCESS,
+    FETCH_WEATHER_WEEKLY_ERROR
 } from '../actions/actionTypes';
 
 const initialState = {
     city: null,
     weather: {},
     weatherHourly: [],
+    weatherWeekly: [],
     timezone: null,
     touched: false,
+    checkExisting: false,
     error: {
         message: null,
         isError: false
@@ -64,6 +69,30 @@ const weatherReducer = (state = initialState, action) => {
                 loading: false,
             }
         case FETCH_WEATHER_HOURLY_ERROR:
+            return {
+                ...state,
+                error: {
+                    message: action.error,
+                    isError: true
+                },
+                loading: false,
+            }
+        case FETCH_WEATHER_WEEKLY_START:
+            return {
+                ...state,
+                loading: true,
+            }
+        case FETCH_WEATHER_WEEKLY_SUCCESS:            
+            return {
+                ...state,
+                weatherWeekly: action.weatherWeekly,
+                timezone: action.timezone,
+                error: {
+                    isError: false
+                },
+                loading: false,
+            }
+        case FETCH_WEATHER_WEEKLY_ERROR:
             return {
                 ...state,
                 error: {

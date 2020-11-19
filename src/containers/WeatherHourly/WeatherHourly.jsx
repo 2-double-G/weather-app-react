@@ -62,14 +62,14 @@ class WeatherHourly extends Component {
                             ? <div
                                 key={index}
                                 className={classes.WeatherHourly__item}
-                            >
-                                <span>{this.showDate(item.dt)}</span>
-                                <img
-                                    src={`http://openweathermap.org/img/wn/${item.icon}@2x.png`}
-                                    alt='Weather condition'
-                                />
-                                <span>{Math.round(item.temp)}&deg;</span>
-                            </div>
+                              >
+                                    <span>{this.showDate(item.dt)}</span>
+                                    <img
+                                        src={`http://openweathermap.org/img/wn/${item.icon}@2x.png`}
+                                        alt='Weather condition'
+                                    />
+                                    <span>{Math.round(item.temp)}&deg;</span>
+                              </div>
                             : null
                     }
                 </Auxiliary>
