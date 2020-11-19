@@ -1,0 +1,13 @@
+.MenuIcon {
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    z-index: 20;
+    font-size: 30px;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.MenuIcon:hover {
+    opacity: .7;
+}

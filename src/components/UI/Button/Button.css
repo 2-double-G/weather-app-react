@@ -4,7 +4,7 @@
     border-radius: 4px;
     border: 1px solid #cccccc;
     color: #ffffff;
-    background: rgb(59, 187, 113);
+    background: transparent;
     text-transform: uppercase;
     font-weight: bold;
     font-size: 12px;
@@ -14,6 +14,10 @@
 
 .Button:focus {
     outline: none;
+}
+
+.Button:hover {
+    opacity: .8;
 }
 
 .Button:active {

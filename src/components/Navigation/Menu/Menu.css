@@ -1,0 +1,36 @@
+.Menu {
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    height: 100%;
+    width: 100%;
+    background-color: #202046;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    clip-path: circle(100%);
+    transition: all .5s ease-in-out;
+}
+
+.Menu.close {  
+    clip-path: circle(0px at calc(100% - 30px) 30px);
+}
+
+.Menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.Menu ul li  {
+    margin-bottom: 10px;
+}
+
+.Menu ul li a {
+    cursor: pointer;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 25px;
+}

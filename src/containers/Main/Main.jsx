@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import classes from './Main.css';
 import GetWeather from './../GetWeather/GetWeather';
-import Navigation from '../../components/Navigation/Navigation';
+import Navigation from '../../components/Navigation/Links/Links';
 
 class Main extends Component {
     render() {

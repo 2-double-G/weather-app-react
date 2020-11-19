@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 
-import classes from './Navigation.css';
+import classes from './Links.css';
 
 const links = [
-    { to: '/', label: 'Search weather', exact: true },
     { to: '/today', label: 'Today', exact: false },
-    { to: '/by-hour', label: 'By hour', exact: false },
-    { to: '/week', label: 'Week', exact: false },
+    { to: '/hourly', label: 'Hourly', exact: false },
+    { to: '/weekly', label: 'Weekly', exact: false },
 ];
 
-class Navigation extends Component {
+class Links extends Component {
 
     renderLinks() {
         return (
@@ -31,7 +30,7 @@ class Navigation extends Component {
 
     render() {
         return (
-            <nav className={classes.Navigation}>
+            <nav className={classes.Links}>
                 <ul>
                     {this.renderLinks()}
                 </ul>
@@ -40,4 +39,4 @@ class Navigation extends Component {
     }
 }
 
-export default Navigation;
+export default Links;

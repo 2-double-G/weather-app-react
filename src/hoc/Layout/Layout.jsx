@@ -1,13 +1,44 @@
 import React, { Component } from 'react';
 import classes from './Layout.css';
+import MenuIcon from '../../components/Navigation/MenuIcon/MenuIcon';
+import Menu from './../../components/Navigation/Menu/Menu';
 
-export default class Layout extends Component {
+
+class Layout extends Component {
+
+    state = {
+        menu: false
+    }
+
+    menuClickHandler = () => {
+        this.setState({
+            menu: !this.state.menu
+        })
+    }
+
+    onCloseMenuHandler () {
+        this.setState({
+            menu: false
+        })
+    }
 
     render() {
         return (
-            <main className={classes.Layout}>
-                {this.props.children}
-            </main>
+            <div className={classes.Layout}>     
+                <main>
+                    {this.props.children}
+                </main>
+                <Menu
+                    isOpen={this.state.menu}
+                    onCLose={this.onCloseMenuHandler.bind(this)}
+                />
+                <MenuIcon
+                    isOpen={this.state.menu}
+                    onToggle={this.menuClickHandler}
+                />
+            </div>
         );
     }
 }
+
+export default Layout;
