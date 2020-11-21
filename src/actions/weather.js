@@ -66,7 +66,7 @@ export const fetchTodayWeather = city => {
         const localCityName = storeCityName(city);
 
         try {          
-            const response = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${localCityName}&appid=4248d412b7d3efc097f20f1640cf0f2d&units=metric`);
+            const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${localCityName}&appid=4248d412b7d3efc097f20f1640cf0f2d&units=metric`);
             const data = await response.json();
 
             if (data.cod === '404') throw new Error(`City not found`);
