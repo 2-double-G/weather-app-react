@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-import Navigation from '../Links/Links';
 import classes from './Menu.css'
 
 const links = [
