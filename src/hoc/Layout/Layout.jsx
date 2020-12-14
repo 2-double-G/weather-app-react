@@ -1,44 +1,37 @@
-import React, { Component } from 'react';
-import classes from './Layout.css';
-import MenuIcon from '../../components/Navigation/MenuIcon/MenuIcon';
-import Menu from './../../components/Navigation/Menu/Menu';
+import React from "react";
+import { connect } from "react-redux";
 
+import classes from  "./Layout.module.scss";
 
-class Layout extends Component {
+import { Header } from "../../components/Header/Header";
 
-    state = {
-        menu: false
-    }
+import GetWeather from "./../../containers/GetWeather/GetWeather";
+import Navigation from "../../components/Navigation/Links/Links";
 
-    menuClickHandler = () => {
-        this.setState({
-            menu: !this.state.menu
-        })
-    }
+const Layout = props => {
+  const renderChildren = (touched, children, isError) => {
+    return isError ? (<h1>Sorry, man. You are wrong...</h1>)
+      : (touched ? (children) : (<h1>Enter city!</h1>));
+  };
 
-    onCloseMenuHandler () {
-        this.setState({
-            menu: false
-        })
-    }
+  const { touched, children, isError } = props;
 
-    render() {
-        return (
-            <div className={classes.Layout}>     
-                <main>
-                    {this.props.children}
-                </main>
-                <Menu
-                    isOpen={this.state.menu}
-                    onCLose={this.onCloseMenuHandler.bind(this)}
-                />
-                <MenuIcon
-                    isOpen={this.state.menu}
-                    onToggle={this.menuClickHandler}
-                />
-            </div>
-        );
-    }
-}
+  return (
+    <div className={classes.Layout}>
+      <Header>
+        <GetWeather />
+        <Navigation />
+      </Header>
+      <main>{renderChildren(touched, children, isError)}</main>
+    </div>
+  );
+};
 
-export default Layout;
+const mapStateToProps = (state) => {
+  return {
+    touched: state.city.touched,
+    isError: state.city.isError,
+  };
+};
+
+export default connect(mapStateToProps)(Layout);

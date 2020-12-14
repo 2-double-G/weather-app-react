@@ -1,132 +1,96 @@
-import React, { Component, Fragment } from 'react';
-import { Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { fetchHourlyWeather } from '../../actions/weather';
-import classes from './WeatherHourly.css';
-import Loader from './../../components/UI/Loader/Loader';
-import Button from './../../components/UI/Button/Button';
-import { changeFilter } from './../../actions/filter';
-import Auxiliary from './../../hoc/Auxiliary/Auxiliary';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+
+import { Card } from "./Card";
+import Loader from "./../../components/Loader/Loader";
+
+import { fetchHourlyWeather } from "../../store/actions/weather";
+import { changeFilter } from "../../store/actions/filter";
 
 const btn = [
-    {
-        id: '12 hour',
-        value: 12
-    },
-    {
-        id: '36 hour',
-        value: 36
-    },
-    {
-        id: '48 hour',
-        value: 48
-    }
-]
+  {
+    id: "12 hour",
+    value: 12,
+  },
+  {
+    id: "36 hour",
+    value: 36,
+  },
+  {
+    id: "48 hour",
+    value: 48,
+  },
+];
 
 class WeatherHourly extends Component {
-  
-    componentDidMount() {
-        this.props.fetchHourlyWeather();
-    }
+  componentDidMount() {
+    this.props.fetchHourlyWeather();
+  }
 
-    showDate = dateTime => {
-        const options = { hour: 'numeric' };
+  renderButtons() {
+    const { changeFilter } = this.props;
 
-        const myShift = - new Date().getTimezoneOffset() / 60;
-        const cityShift = this.props.timezone / 3600;
+    return btn.map(({ id, value }) => (
+        <button
+          key={id}
+          type="button"
+          class="btn btn-outline-light mx-2 text-uppercase"
+          onClick={() => changeFilter(value)}
+        >
+          {id}
+        </button>
+      )
+    );
+  }
 
-        return new Date(dateTime * 1000 - (myShift - cityShift)*1000*3600).toLocaleDateString('en-US', options).split(',')[1]
-    }
+  renderHourly() {
+    const { weather, activFilter, timezone } = this.props;
 
-    renderButtons () {
-        return btn.map((item, index) => {
-            return (
-                <Button
-                    key={item.id + index}
-                    value={item.value}
-                    disabled={false}
-                    onClick={() => this.props.changeFilter(item.value)}
-                >
-                    {item.id}
-                </Button>
-            );
-        });
-    }
+    return weather.map(({ dt, icon, temp }, index) =>
+      index < activFilter ? (
+        <div key={index} className="col-sm-3 mb-4">
+          <Card dt={dt} icon={icon} temp={temp} timezone={timezone} />
+        </div>
+      ) : null
+    );
+  }
 
-    renderHourly () {
-        return this.props.weather.map((item, index) => {
-            return (
-                <Auxiliary>
-                    {
-                        index < this.props.activFilter
-                            ? <div
-                                key={index}
-                                className={classes.WeatherHourly__item}
-                              >
-                                    <span>{this.showDate(item.dt)}</span>
-                                    <img
-                                        src={`http://openweathermap.org/img/wn/${item.icon}@2x.png`}
-                                        alt='Weather condition'
-                                    />
-                                    <span>{Math.round(item.temp)}&deg;</span>
-                              </div>
-                            : null
-                    }
-                </Auxiliary>
-            );
-        });
-    }
+  showCityName() {
+    return localStorage.getItem("city").split(" ")
+      .map((word) => {
+        return word[0].toUpperCase() + word.slice(1);
+      })
+      .join(" ");
+  }
 
-    showCityName() {
-        if (!localStorage.getItem('city')) return localStorage.getItem('city');
-
-        return localStorage.getItem('city').split(' ').map(word => {
-            return word[0].toUpperCase() + word.slice(1);
-        }).join(' ');
-    }
-      
-    render() {
-        return (
-            <Fragment>
-                {
-                    this.props.error
-                        ? <Redirect to={'/'} />
-                        : null
-                }
-                <div className={classes.WeatherHourly}>
-                    <h1>Hourly weather</h1>
-                    <div className={classes.filterButtons}>                      
-                        {this.renderButtons()}
-                    </div>                  
-                    <h2 className={classes.cityName}>{this.showCityName()}</h2>
-                    <div>
-                        {
-                            this.props.loading
-                                ? <Loader />
-                                : this.renderHourly()
-                        }
-                    </div>
-                </div>
-            </Fragment>
-        );
-    }
+  render() {
+    return (
+      <div className="container text-center">
+        <h1>{this.showCityName()}</h1>
+        <h2>Hourly weather</h2>
+        <div className="m-4">{this.renderButtons()}</div>
+        <div className="row">
+          {this.props.loading ? <Loader /> : this.renderHourly()}
+        </div>
+      </div>
+    );
+  }
 }
 
-function mapStateToProps(state) {
-    return {
-        weather: state.weatherToday.weatherHourly,
-        timezone: state.weatherToday.timezone,
-        loading: state.weatherToday.loading,
-        error: state.weatherToday.error.isError,
-        activFilter: state.filter.activFilter
-    }
-}
+const mapStateToProps = (state) => {
+  return {
+    weather: state.weatherToday.weatherHourly,
+    timezone: state.weatherToday.timezone,
+    loading: state.weatherToday.loading,
+    activFilter: state.filter.activFilter,
+  };
+};
 
-function mapDispatchToProps(dispatch) {
-    return {
-        fetchHourlyWeather: () => dispatch(fetchHourlyWeather()),
-        changeFilter: activFilter => dispatch(changeFilter(activFilter))
-    }
-}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchHourlyWeather: () => dispatch(fetchHourlyWeather()),
+    changeFilter: (activFilter) => dispatch(changeFilter(activFilter)),
+  };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(WeatherHourly);

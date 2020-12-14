@@ -1,0 +1,16 @@
+.Layout {
+    display: flex;
+    flex-direction: column;
+    background: #e07a5f;
+    padding: 150px 15px 15px;
+    min-height: 100vh;
+    color: aliceblue;
+    box-sizing: border-box;
+
+    & main {
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        flex-grow: 1;
+    }
+}

@@ -1,42 +1,29 @@
-import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
+import React from "react";
+import { NavLink } from "react-router-dom";
 
-import classes from './Links.css';
+import classes from "./Links.module.scss";
 
 const links = [
-    { to: '/today', label: 'Today', exact: false },
-    { to: '/hourly', label: 'Hourly', exact: false },
-    { to: '/weekly', label: 'Weekly', exact: false },
+  { to: "/", label: "Today", exact: true },
+  { to: "/hourly", label: "Hourly", exact: false },
+  { to: "/weekly", label: "Weekly", exact: false },
 ];
 
-class Links extends Component {
+const Links = () => {
+  const renderLinks = () =>
+    links.map(({ to, exact, label }, index) => (
+      <li key={index}>
+        <NavLink to={to} exact={exact} activeClassName={classes.active}>
+          {label}
+        </NavLink>
+      </li>
+    ));
 
-    renderLinks() {
-        return (
-            links.map((link, index) => {
-                return (
-                    <li key={index}>
-                        <NavLink
-                            to={link.to}
-                            exact={link.exact}
-                        >
-                            {link.label}
-                        </NavLink>
-                    </li>
-                )
-            })
-        )
-    }
-
-    render() {
-        return (
-            <nav className={classes.Links}>
-                <ul>
-                    {this.renderLinks()}
-                </ul>
-            </nav>
-        )
-    }
-}
+  return (
+    <nav className={classes.Links}>
+      <ul>{renderLinks()}</ul>
+    </nav>
+  );
+};
 
 export default Links;
